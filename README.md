@@ -35,7 +35,8 @@ Configuration needed: You have to adjust the lines `PrivateKey =`, `PublicKey = 
 
 Location: `/etc/wireguard/up-netns.sh`
 
-Purpose: Assign IP-Addresses to the wireguard-Interface and move it to the Network-Namespace. Make the Wireguard-Interface the default gateway inside the Namespace.
+Purpose: Create the Wireguard-Interface manually, assign IP-Addresses to it and move it to the Network-Namespace. Make the Wireguard-Interface the default gateway inside the Namespace.
+
 
 Configuration needed: No.
 
