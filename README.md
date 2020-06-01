@@ -1,7 +1,7 @@
 # Wireguard on Namespaces
 
 ## Purpose 
-I want some applications to see just a specific (VPN) Interface. Instead of some iptables-Vodoo i decided to use Network Namespaces.
+I want some applications to see just a specific (VPN) Interface. Instead of some iptables-Voodoo i decided to use Network Namespaces.
 
 ## Usage
 
@@ -13,7 +13,7 @@ Location: `/usr/local/sbin/create-ns.sh`
 
 Purpose: Create the desired namespace. Will be called by a systemd-Unit. It will also create a veth-Interface to handle communication in and out the namespace. The IP in the container is `10.147.143.2/24`, on the host `10.147.143.1/24`
 
-Configuration needed: None, if you are happy wit the IPs and the Namespace-Name "vpn".
+Configuration needed: No, if you are happy with the IPs and the Namespace-Name "vpn".
 
 ### create-ns-vpn.service
 
