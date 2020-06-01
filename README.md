@@ -47,3 +47,4 @@ Purpose: Bring the wireguard-Interface up by calling up-netns.sh
 
 Configuration needed: You have to adjust the IP-Addresses to your needs. In the example, I used `10.1.1.10/32` and `fe80::3/128`. Those will probably not work in your Wireguard-Setup. Also, if you want to use a different Network-Namespace-Name than "vpn", you have to adjust it here in the second Argument of the `up-netns.sh` call.
 
+After placing the files at the right location, you just have to execute `systemctl enable create-ns-vpn.service` and `systemctl enable wg-netns.service`, and a Network-Namespace with vpn as the only way out will magically appear ^-^
