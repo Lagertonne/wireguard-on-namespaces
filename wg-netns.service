@@ -1,0 +1,18 @@
+[Unit]
+Description=WireGuard via wg-quick(8) for %I
+After=network-online.target nss-lookup.target create-ns-vpn.service
+Wants=network-online.target nss-lookup.target
+Documentation=man:wg(8)
+Documentation=https://www.wireguard.com/
+Documentation=https://www.wireguard.com/quickstart/
+Documentation=https://git.zx2c4.com/wireguard-tools/about/src/man/wg.8
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/wireguard/up-netns.sh wireguard-vpn vpn 10.1.1.10/32 fe80::3/128
+ExecStop=/sbin/ip netns exec vpn ip link del wireguard-vpn
+
+[Install]
+WantedBy=multi-user.target
+

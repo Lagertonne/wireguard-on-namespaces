@@ -1,0 +1,15 @@
+# /etc/systemd/system/create-ns-vpn.service
+[Unit]
+Description=Create Network Namespace VPN
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/create-ns.sh
+RemainAfterExit=true
+ExecStop=/sbin/ip netns delete vpn
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+
