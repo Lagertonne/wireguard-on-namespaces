@@ -49,3 +49,27 @@ Purpose: Bring the wireguard-Interface up by calling up-netns.sh
 Configuration needed: You have to adjust the IP-Addresses to your needs. In the example, I used `10.1.1.10/32` and `fe80::3/128`. Those will probably not work in your Wireguard-Setup. Also, if you want to use a different Network-Namespace-Name than "vpn", you have to adjust it here in the second Argument of the `up-netns.sh` call.
 
 After placing the files at the right location, you just have to execute `systemctl enable create-ns-vpn.service` and `systemctl enable wg-netns.service`, and a Network-Namespace with vpn as the only way out will magically appear ^-^
+
+
+## Start systemd-Service inside Network-Namespace
+
+Sadly, I haven't found a better way to do this than using sudo and starting the service initially as root. Here is my example config for Jackett:
+```
+[Unit]
+Description=Jackett Daemon
+After=network.target
+
+[Service]
+SyslogIdentifier=jackett
+Restart=always
+RestartSec=45
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/Jackett
+ExecStart=/sbin/ip netns exec vpn sudo -u dummy /opt/Jackett/jackett --NoRestart -d /var/lib/jackett
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
+```
